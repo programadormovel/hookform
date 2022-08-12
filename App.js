@@ -38,14 +38,29 @@ export default function HookForm() {
             onChangeText={onChange}
             placeholder="Digite seu nome"
           />
-        )}      
+        )}   
+        name="nome"   
+      />
+      {errors.nome && <Text>Campo obrigatório!</Text> }
+
+      <Controller
+        control={control}
+        rules={{
+          maxLength: 100,
+        }}
+        render={({field: {onChange, onBlur, value }}) => (
+          <TextInput 
+            style={styles.input}
+            value = {value}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            placeholder="Digite seu sobrenome"
+          />
+        )}
+        name="sobrenome"      
       />
 
-      <TextInput 
-        style={styles.input}
-        value={'sobrenome'} />
-
-      <Button title="Enviar Dados" />
+      <Button title="Enviar Dados" onPress={handleSubmit(onSubmit)} />
     </View>
   )
 }
