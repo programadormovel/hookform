@@ -3,6 +3,9 @@ import { Text, View, TextInput, Button,
   Alert, StyleSheet } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 export default function HookForm() {
 
   const {
