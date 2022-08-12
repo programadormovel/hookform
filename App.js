@@ -19,7 +19,7 @@ export default function HookForm() {
     }
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
 
     // Dados serão armazenados no AsyncStorage
@@ -81,13 +81,12 @@ export default function HookForm() {
       <Button title="Recuperar Dados"
           onPress={async ()=>{
             try {
-              const dadosJSONRecuperados = await
-              AsyncStorage.getItem('@dados');
+              const dadosJSONRecuperados = await AsyncStorage.getItem('@dados');
               if(dadosJSONRecuperados !== null) {
                 // dados gravados no AsyncStorage
                 const dados = JSON.parse(dadosJSONRecuperados);
-                Alert.alert(dados.nome + "\n" + 
-                dados.sobrenome);
+                // Mostrar dados na tela
+                Alert.alert(dados.nome + "\n" + dados.sobrenome);
               }
             } catch(e) {
               // erro ao ler valores
