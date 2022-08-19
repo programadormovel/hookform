@@ -23,6 +23,23 @@ export default function HookForm() {
     });
   }, []);
 
+  const adicionar = (nome, sobrenome) => {
+    if (nome === null || nome === ""){
+      Alert.alert("Por favor, preencha o campo nome!")
+    } else {
+      db.transaction((tx) => {
+        tx.executeSql("insert into nomes (nome, " + 
+          "sobrenome) values (?, ?)", [nome, sobrenome]);
+        tx.executeSql("select * from nomes", [], (_, 
+            { rows }) =>
+            console.log(JSON.stringify(rows))
+            );    
+      }, 
+      null,
+      useForceUpdate)
+    }
+  };
+
   const {
     control,
     handleSubmit,
