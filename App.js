@@ -60,6 +60,8 @@ export default function HookForm() {
       const dadosJSON = JSON.stringify(data);
       // Dados transformados serão guardados no AsyncStorage
       await AsyncStorage.setItem('@dados', dadosJSON);
+      // Solicitar gravação de dados na tabela dados.db SQLite
+      adicionar(data.nome, data.sobrenome);
       // Mensagem
       Alert.alert(data.nome + "\n" + 
         data.sobrenome);
@@ -146,3 +148,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   }
 })
+
+function useForceUpdate() {
+  const [value, setValue] = useState(0);
+  return [() => setValue(value + 1), value];
+}
+  
