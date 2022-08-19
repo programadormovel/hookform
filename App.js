@@ -4,9 +4,24 @@ import { Text, View, TextInput, Button,
 import { useForm, Controller } from 'react-hook-form';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import * as SQLite from 'expo-sqlite';
 
 export default function HookForm() {
+
+  // Estado de controle de alterações na tabela
+  const [forceUpdate] = useForceUpdate();
+  // Abrir ou criar banco de dados SQLite
+  const db = SQLite.openDatabase("dados.db");
+
+  // Hook useEffect para criar o banco assim que a janela for carregada
+  useEffect(() => {
+    db.transaction((tx)=>{
+      tx.executeSql(
+        "create table if not exists nomes (id integer " +
+           "primary key not null, nome text, sobrenome text)"
+      );
+    });
+  }, []);
 
   const {
     control,
