@@ -19,14 +19,14 @@ const Listar = () => {
       tx.executeSql("Select * from nomes;", [], (_, { rows }) => {
         console.log(JSON.stringify(rows));
         setDATA(rows);
-        console.log(JSON.stringify(DATA._array[0].nome));
+        // console.log(JSON.stringify(DATA._array[1].nome));
       });
     });
   }, []);
 
   const getItem = (data, index) => ({
     id: JSON.stringify(data._array[index].id),
-    nome: JSON.stringify(data._array[index.nome]),
+    nome: JSON.stringify(data._array[index].nome),
     sobrenome: JSON.stringify(data._array[index].sobrenome),
   });
 
@@ -35,13 +35,12 @@ const Listar = () => {
   const Item = ({ nome, sobrenome }) => (
     <View style={styles.item}>
       <Text style={styles.nome}>{nome}</Text>
-      <Text>{sobrenome}</Text>
+      <Text style={styles.nome}>{sobrenome}</Text>
     </View>
   );
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <VirtualizedList
             data={DATA}
             initialNumToRender={4}
@@ -56,7 +55,7 @@ const Listar = () => {
             // scrollEnabled={true}
             // onScroll={atualizarDados}
         />
-      </View>
+ 
     </SafeAreaView>
   );
 };
