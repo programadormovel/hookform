@@ -19,15 +19,15 @@ const Listar = () => {
       tx.executeSql("Select * from nomes;", [], (_, { rows }) => {
         console.log(JSON.stringify(rows));
         setDATA(rows);
-        console.log(JSON.stringify(DATA).at(0).nome);
+        console.log(JSON.stringify(DATA._array[0].nome));
       });
     });
   }, []);
 
   const getItem = (data, index) => ({
-    id: JSON.stringify(DATA._array[index].id),
-    nome: JSON.stringify(DATA._array[index.nome]),
-    sobrenome: JSON.stringify(DATA._array[index].sobrenome),
+    id: JSON.stringify(data._array[index].id),
+    nome: JSON.stringify(data._array[index.nome]),
+    sobrenome: JSON.stringify(data._array[index].sobrenome),
   });
 
   const getItemCount = (data) => data.length;
