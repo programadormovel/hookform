@@ -39,23 +39,32 @@ const Listar = () => {
     </View>
   );
 
+  const atualizarDados = () => {
+    db.transaction((tx) => {
+      tx.executeSql("select * from nomes", [], (_, { rows }) => {
+        console.log(JSON.stringify(rows));
+        setDATA(rows);
+        //
+        // console.log(JSON.stringify(DATA._array[0].nome));
+      });
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-        <VirtualizedList
-            data={DATA}
-            initialNumToRender={4}
-            renderItem={({item}) => 
-                <Item 
-                    nome={item.nome} 
-                    sobrenome={item.sobrenome} />}
-            keyExtractor={(item) => item.id}
-            getItemCount={getItemCount}
-            getItem={getItem}
-            // refreshing={true}
-            // scrollEnabled={true}
-            // onScroll={atualizarDados}
-        />
- 
+      <VirtualizedList
+        data={DATA}
+        initialNumToRender={4}
+        renderItem={({ item }) => (
+          <Item nome={item.nome} sobrenome={item.sobrenome} />
+        )}
+        keyExtractor={(item) => item.id}
+        getItemCount={getItemCount}
+        getItem={getItem}
+        refreshing={true}
+        scrollEnabled={true}
+        onScroll={atualizarDados}
+      />
     </SafeAreaView>
   );
 };
