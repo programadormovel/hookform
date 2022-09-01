@@ -27,6 +27,16 @@ const Estilo = StyleSheet.create({
       fontSize: 32,
       color: "black"
     },
+    containerImagem: {
+      width: 100, 
+      height: 200, 
+      marginTop: 40, 
+      alignSelf: "center",
+    },
+    imagem: {
+      width:100, 
+      height: 100
+    },
   });
 
 export default Estilo;
