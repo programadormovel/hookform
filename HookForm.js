@@ -114,8 +114,8 @@ export default function HookForm() {
   }
 
   const ImagemCarregada = () => (
-    
-  )
+    <View></View>
+  );
 
   return (
     <View style={styles.container}>
