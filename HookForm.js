@@ -1,14 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import { Text, View, TextInput, Button, 
-  Alert, StyleSheet } from 'react-native';
+  Alert, StyleSheet, Platform } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SQLite from 'expo-sqlite';
 
 import styles from './Estilo';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function HookForm() {
+
+  // Estados para captura de imagem
+  const [image, setImage] = useState(null);
+  const [image2, setImage2] = useState(null);
 
   // Estado de controle de alterações na tabela
   const [forceUpdate] = useForceUpdate();
@@ -23,6 +28,25 @@ export default function HookForm() {
            "primary key not null, nome text, sobrenome text)"
       );
     });
+  }, []);
+
+  useEffect(()=>{
+    (async ()=> {
+      if (Platform.OS !== 'web'){
+        const {status} = await 
+          ImagePicker.requestMediaLibraryPermissionsAsync();
+        if(status !== 'granted'){
+          Alert.alert('Lamento, precisamos de sua ' +
+          'permissão para executar este serviço');
+        }
+      }
+    })();
+    db.transaction((tx) => {
+      tx.executeSql("create table if not exists nomes2 " +
+      "(id integer primary key not null, " + 
+      "nome text, sobrenome text, " +
+      " imagem blob);")
+    })
   }, []);
 
   const adicionar = (nome, sobrenome) => {
@@ -71,12 +95,30 @@ export default function HookForm() {
       // saving error
       Alert.alert(e.message);
     }  
-
   };
+
+  // Componente de carregamento da imagem da galeria
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if(!result.cancelled) {
+      setImage(result.uri);
+    }
+  }
+
+  const ImagemCarregada = () => (
+    
+  )
 
   return (
     <View style={styles.container}>
-
       <Controller
         control={control}
         rules={{
