@@ -69,7 +69,7 @@ export default function HookForm() {
       db.transaction(
         (tx) => {
           tx.executeSql(
-            "insert into nomes2 (nome, " + "sobrenome, foto) values (?, ?, ?)",
+            "insert into nomes2 (nome, sobrenome, imagem) values (?, ?, ?)",
             [nome, sobrenome, image]
           );
           tx.executeSql("select * from nomes2", [], (_, { rows }) =>
@@ -202,7 +202,7 @@ export default function HookForm() {
                   const dados = JSON.parse(dadosJSONRecuperados);
                   setImage2(imagemRecuperada);
                   // Mostrar dados na tela
-                  Alert.alert(dados.nome + 
+                  alert(dados.nome + 
                     "\n" + dados.sobrenome + "\n" +
                     <ImagemRecuperada/> );
                 }

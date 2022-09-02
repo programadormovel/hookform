@@ -17,7 +17,7 @@ const Estilo = StyleSheet.create({
     },
     item: {
       backgroundColor: "#f9c2ff",
-      height: 150,
+      height: 300,
       justifyContent: "center",
       marginVertical: 8,
       marginHorizontal: 16,
