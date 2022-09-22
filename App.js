@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Listar">
+      <Stack.Navigator initialRouteName="HookForm">
         <Stack.Screen name="HookForm" component={HookForm} />
         <Stack.Screen name="Listar" component={Listar} />
       </Stack.Navigator>
