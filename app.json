@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "packagerOpts": {
+      "sourceExts": ["cjs, idb, esm"]
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },

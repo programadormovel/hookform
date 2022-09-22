@@ -5,6 +5,7 @@ import * as SQLite from "expo-sqlite";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, listAll } from "firebase/storage";
+// import "firebase/storage";
 
 const Listar = () => {
   const [DATA, setDATA] = useState([]);
@@ -22,7 +23,7 @@ const Listar = () => {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
-  const storage = getStorage(app, "gs://hookform2022.appspot.com");
+  const storage = getStorage(app); //, "gs://hookform2022.appspot.com");
 
   // Create a reference under which you want to list
   const listRef = ref(storage); //, "files/uid");
@@ -44,7 +45,7 @@ const Listar = () => {
       });
       res.items.forEach((itemRef) => {
         // All the items under listRef.
-        console.log(itemRef);
+        console.log(JSON.stringify(itemRef.name));
       });
     })
     .catch((error) => {
